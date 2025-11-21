@@ -2,7 +2,7 @@ import pickle
 import streamlit as st
 import pandas as pd
 
-df = pd.read_csv('laptop.csv')
+df = pd.read_csv('data.csv')
 st.title('Laptop Price Predictor')
 
 company = st.selectbox('Company', df['Company'].unique())
@@ -31,10 +31,11 @@ input_df = pd.DataFrame({
     'Weight' : [wt]
 })
 
-with open('laptop.pkl', 'rb') as f:
+with open('model.pkl', 'rb') as f:
     model = pickle.load(f)
 
 output_df = model.predict(input_df)
 
 if st.button('Show Prediction'):
+
     st.success(f'Predicted Price is {output_df[0]:.2f}')
